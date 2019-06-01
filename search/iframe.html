@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WhatsOnChain.com search widget iFrame</title>
+    <style>
+        html {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        #WoC-search {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+    <script src="div.js"></script>
+</head>
+<body>
+<div id="WoC-search"></div>
+</body>
+</html>
+<script>
+    // https://stackoverflow.com/a/13419367
+    var parseQuery = function(queryString) {
+        var query = {};
+        var pairs = (queryString[0] === '?' ? queryString.substr(1) : queryString).split('&');
+        for (var i = 0; i < pairs.length; i++) {
+            var pair = pairs[i].split('=');
+            var key = decodeURIComponent(pair[0]);
+            var value = decodeURIComponent(pair[1] || '');
+            if (value === 'true') value = true;
+            if (value === 'false') value = false;
+            query[key] = value;
+        }
+        return query;
+    };
+
+    var options = parseQuery(document.location.search);
+    WoC_search.init(document.getElementById('WoC-search'), options);
+</script>
